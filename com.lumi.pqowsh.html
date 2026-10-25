@@ -3,93 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Privacy Policy · Lumi</title>
+<title>Privacy Policy</title>
 <style>
   :root {
-    --brand: #5b5bd6;
-    --brand-strong: #4a4ac4;
-    --bg: #f7f7fb;
-    --surface: #ffffff;
-    --surface-2: #f0f0f7;
-    --text: #14141f;
-    --text-soft: #5b5b6e;
-    --text-faint: #8a8a9d;
-    --border: #e3e3ee;
-    --shadow: 0 8px 30px rgba(20, 20, 45, 0.08);
-    --shadow-sm: 0 2px 10px rgba(20, 20, 45, 0.06);
-    --radius-lg: 22px;
+    --brand: #5B4DFF;
+    --brand-strong: #4638E0;
+    --bg: #F6F7FB;
+    --surface: #FFFFFF;
+    --surface-alt: #EFF1F8;
+    --text: #12141C;
+    --text-soft: #5A6072;
+    --text-faint: #8A90A4;
+    --border: #E1E4EE;
+    --shadow-sm: 0 1px 2px rgba(18, 20, 28, 0.06);
+    --shadow-md: 0 8px 24px rgba(18, 20, 28, 0.08);
+    --shadow-lg: 0 16px 40px rgba(18, 20, 28, 0.12);
+    --radius-sm: 10px;
     --radius-md: 16px;
-    --radius-sm: 12px;
-    --space-1: 6px;
-    --space-2: 10px;
-    --space-3: 16px;
-    --space-4: 22px;
-    --space-5: 30px;
+    --radius-lg: 22px;
+    --radius-pill: 999px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-7: 32px;
+    --space-8: 40px;
     --safe-top: env(safe-area-inset-top, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --brand: #8b8bf0;
-      --brand-strong: #a5a5ff;
-      --bg: #0d0d13;
-      --surface: #17171f;
-      --surface-2: #1f1f2b;
-      --text: #f2f2f8;
-      --text-soft: #b3b3c4;
-      --text-faint: #83839a;
-      --border: #2b2b3a;
-      --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-      --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --brand: #7C6BFF;
+      --brand-strong: #9486FF;
+      --bg: #0C0E14;
+      --surface: #151824;
+      --surface-alt: #1D2130;
+      --text: #F2F3F8;
+      --text-soft: #A9B0C4;
+      --text-faint: #767E94;
+      --border: #2A3044;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
     }
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-  html, body {
+  html, body { height: 100%; }
+
+  body {
     margin: 0;
-    padding: 0;
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  body {
-    min-height: 100vh;
-    min-height: 100dvh;
+  .app-shell {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* ---------- Loading screen ---------- */
-  #loading-screen {
+  /* ---------- Loading ---------- */
+  .loading-screen {
     position: fixed;
     inset: 0;
+    z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-4);
+    gap: var(--space-5);
     background: var(--bg);
-    padding: calc(var(--safe-top) + 24px) 24px calc(var(--safe-bottom) + 24px);
-    z-index: 50;
-    transition: opacity 0.35s ease, visibility 0.35s ease;
+    padding: var(--safe-top) var(--space-6) var(--safe-bottom);
+    transition: opacity 0.28s ease, visibility 0.28s ease;
   }
 
-  #loading-screen.is-hidden {
+  .loading-screen.is-hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
   }
 
-  .app-icon {
+  .loading-icon {
     width: 88px;
     height: 88px;
-    border-radius: 22px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    background: var(--surface);
     object-fit: cover;
-    box-shadow: var(--shadow);
-    background: var(--surface-2);
     display: block;
   }
 
@@ -100,379 +110,580 @@
     animation: spin 0.9s linear infinite;
   }
 
-  @keyframes spin {
-    to { transform: rotate(360deg); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-label {
+    font-size: 14px;
+    color: var(--text-soft);
+    letter-spacing: 0.01em;
   }
 
-  /* ---------- Main content ---------- */
-  #privacy-screen {
+  /* ---------- Content ---------- */
+  .content {
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: calc(var(--safe-top) + var(--space-6)) var(--space-5) 0;
     display: none;
-    flex-direction: column;
-    min-height: 100vh;
-    min-height: 100dvh;
-    padding-top: var(--safe-top);
-    opacity: 0;
-    transition: opacity 0.35s ease;
   }
 
-  #privacy-screen.is-visible {
-    display: flex;
-    opacity: 1;
-  }
+  .content.is-visible { display: block; }
 
-  .header {
+  .brand-header {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
-    padding: var(--space-5) var(--space-4) var(--space-4);
-    gap: var(--space-3);
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
   }
 
-  .header .app-icon {
-    width: 72px;
-    height: 72px;
-    border-radius: 18px;
+  .brand-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    flex-shrink: 0;
+    background: var(--surface);
+    object-fit: cover;
+    display: block;
   }
 
-  .app-name {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+  .brand-titles { min-width: 0; }
+
+  .brand-name {
     margin: 0;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    word-break: break-word;
+  }
+
+  .brand-sub {
+    margin: 2px 0 0;
+    font-size: 13.5px;
+    color: var(--text-soft);
   }
 
   .page-title {
+    margin: 0 0 var(--space-2);
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .page-lead {
+    margin: 0 0 var(--space-5);
     font-size: 15px;
+    color: var(--text-soft);
+  }
+
+  .meta-line {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    font-size: 12.5px;
     font-weight: 600;
     color: var(--text-soft);
-    margin: 0;
+    margin-bottom: var(--space-6);
   }
 
-  .updated {
-    font-size: 12.5px;
-    color: var(--text-faint);
-    margin: 0;
-  }
+  .meta-line svg { width: 14px; height: 14px; flex-shrink: 0; }
 
-  .content {
-    flex: 1 1 auto;
+  .policy-stack {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
-    padding: 0 var(--space-3) var(--space-4);
-    width: 100%;
-    max-width: 640px;
-    margin: 0 auto;
+    gap: var(--space-4);
   }
 
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
     box-shadow: var(--shadow-sm);
   }
 
-  .card h2 {
+  .card-title {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
-    font-size: 16px;
+    gap: var(--space-3);
+    margin: 0 0 var(--space-3);
+    font-size: 16.5px;
     font-weight: 700;
     letter-spacing: -0.01em;
-    margin: 0 0 var(--space-2);
-    color: var(--text);
   }
 
-  .card h2 .icon {
-    width: 20px;
-    height: 20px;
-    flex: 0 0 auto;
+  .card-title .badge {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--brand) 14%, transparent);
     color: var(--brand);
+    flex-shrink: 0;
   }
+
+  .card-title .badge svg { width: 17px; height: 17px; }
 
   .card p {
-    font-size: 14px;
-    line-height: 1.65;
+    margin: 0 0 var(--space-3);
+    font-size: 14.5px;
     color: var(--text-soft);
-    margin: 0 0 var(--space-2);
   }
 
   .card p:last-child { margin-bottom: 0; }
 
-  .card ul {
-    margin: var(--space-1) 0 0;
-    padding-left: 20px;
-    font-size: 14px;
-    line-height: 1.65;
+  .card strong { color: var(--text); font-weight: 600; }
+
+  .check-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .check-list li {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    font-size: 14.5px;
     color: var(--text-soft);
   }
 
-  .card li { margin-bottom: 4px; }
-  .card li:last-child { margin-bottom: 0; }
-
-  .card strong { color: var(--text); font-weight: 600; }
-
-  .chip {
-    display: inline-block;
-    font-size: 11.5px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--brand) 14%, transparent);
-    color: var(--brand-strong);
-    margin-bottom: var(--space-2);
+  .check-list li svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--brand);
   }
 
-  .contact-link {
-    color: var(--brand-strong);
+  .check-list li .li-text { min-width: 0; }
+  .check-list li b { color: var(--text); font-weight: 600; }
+
+  .contact-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    background: var(--surface-alt);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-4);
+  }
+
+  .contact-box .contact-label {
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+    font-weight: 700;
+    margin: 0 0 2px;
+  }
+
+  .contact-box .contact-mail {
+    font-size: 14.5px;
     font-weight: 600;
-    text-decoration: none;
+    color: var(--brand);
     word-break: break-all;
+    text-decoration: none;
   }
 
-  .contact-link:hover { text-decoration: underline; }
+  .contact-box .contact-mail:hover,
+  .contact-box .contact-mail:focus-visible { text-decoration: underline; }
 
-  /* ---------- Footer / CTA ---------- */
-  .footer {
+  .footnote {
+    margin: var(--space-5) 0 0;
+    font-size: 12.5px;
+    color: var(--text-faint);
+    text-align: center;
+  }
+
+  /* ---------- Action bar ---------- */
+  .action-bar {
     position: sticky;
     bottom: 0;
-    padding: var(--space-3) var(--space-3) calc(var(--space-3) + var(--safe-bottom));
-    padding-bottom: calc(var(--space-3) + var(--safe-bottom, 0px));
-    background: linear-gradient(to top, var(--bg) 65%, transparent);
+    z-index: 20;
+    flex-shrink: 0;
+    margin-top: var(--space-6);
+    background: linear-gradient(to bottom, transparent, var(--bg) 34%);
+    padding: var(--space-4) var(--space-5) calc(var(--safe-bottom) + var(--space-4));
+    display: flex;
+    justify-content: center;
+  }
+
+  .action-inner {
     width: 100%;
-    max-width: 640px;
-    margin: 0 auto;
+    max-width: 720px;
   }
 
   .agree-btn {
     width: 100%;
-    min-height: 54px;
-    display: flex;
+    min-height: 52px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: var(--brand);
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: inherit;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-2);
-    border: none;
-    border-radius: var(--radius-md);
-    background: var(--brand);
-    color: #ffffff;
-    font-size: 16.5px;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    cursor: pointer;
-    box-shadow: 0 6px 20px color-mix(in srgb, var(--brand) 35%, transparent);
-    transition: transform 0.12s ease, background 0.2s ease, box-shadow 0.2s ease;
-    padding: 0 var(--space-3);
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--brand) 38%, transparent);
+    transition: transform 0.12s ease, background 0.15s ease, box-shadow 0.15s ease;
   }
 
-  .agree-btn:active {
-    transform: scale(0.98);
-    background: var(--brand-strong);
-    box-shadow: 0 3px 12px color-mix(in srgb, var(--brand) 30%, transparent);
-  }
+  .agree-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  .agree-btn:active { transform: scale(0.985); background: var(--brand-strong); }
 
   .agree-btn:focus-visible {
-    outline: 3px solid color-mix(in srgb, var(--brand) 60%, transparent);
+    outline: 3px solid color-mix(in srgb, var(--brand) 55%, transparent);
     outline-offset: 2px;
   }
 
-  .agree-btn .icon {
-    width: 20px;
-    height: 20px;
-    flex: 0 0 auto;
-  }
-
-  .hint {
-    text-align: center;
-    font-size: 11.5px;
-    color: var(--text-faint);
-    margin: var(--space-2) 0 0;
-    line-height: 1.5;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .agree-btn { color: #0d0d13; }
-    .agree-btn .icon { color: #0d0d13; }
-  }
-
-  @media (min-width: 480px) {
-    .content { padding-left: var(--space-4); padding-right: var(--space-4); }
-    .footer { padding-left: var(--space-4); padding-right: var(--space-4); }
+  @media (min-width: 640px) {
+    .card { padding: var(--space-6); }
+    .page-title { font-size: 30px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ================= Loading Screen ================= -->
-<div id="loading-screen" role="status" aria-live="polite" aria-label="Loading privacy policy">
-  <img class="app-icon" src="https://admin.ytsevbr.xyz/api/apps/348/icon" alt="Lumi app icon">
-  <svg class="spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
-    <path d="M12 2.5a9.5 9.5 0 1 0 9.5 9.5" />
-  </svg>
+<div class="app-shell">
+
+  <!-- Loading -->
+  <div class="loading-screen" id="loadingScreen" role="status" aria-live="polite">
+    <img class="loading-icon" id="loadingIcon" alt="" />
+    <svg class="spinner" viewBox="0 0 50 50" aria-hidden="true" focusable="false">
+      <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="4.5"
+              stroke-linecap="round" stroke-dasharray="90 55"></circle>
+    </svg>
+    <span class="loading-label">Loading privacy policy…</span>
+  </div>
+
+  <!-- Content -->
+  <main class="content" id="policyContent">
+    <header class="brand-header">
+      <img class="brand-icon" id="brandIcon" alt="" />
+      <div class="brand-titles">
+        <h1 class="brand-name" id="brandName"></h1>
+        <p class="brand-sub">Privacy &amp; Data Practices</p>
+      </div>
+    </header>
+
+    <h2 class="page-title">Privacy Policy</h2>
+    <p class="page-lead">
+      This policy explains, in plain language, what information <span data-app="name"></span> handles,
+      how it is protected, and the control you keep at every step. Please read it before you continue.
+    </p>
+
+    <div class="meta-line">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      <span>Local-first &middot; No tracking &middot; No data selling</span>
+    </div>
+
+    <div class="policy-stack">
+
+      <section class="card">
+        <h3 class="card-title">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </span>
+          Overview
+        </h3>
+        <p>
+          <strong data-app="name"></strong> is designed to work for you without collecting information about you.
+          This policy applies to the mobile application and describes the limited data that touches the app and
+          the protections applied to it.
+        </p>
+        <p>
+          By tapping <strong>Agree &amp; Continue</strong>, you confirm that you have read and understood this
+          policy. If you do not agree, simply close the app and no further data processing will take place.
+        </p>
+      </section>
+
+      <section class="card">
+        <h3 class="card-title">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <ellipse cx="12" cy="5" rx="8" ry="3"></ellipse>
+              <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"></path>
+              <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"></path>
+            </svg>
+          </span>
+          What We Collect
+        </h3>
+        <ul class="check-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="li-text">
+              <b>App content you create.</b> Items, preferences, and settings you create inside
+              <span data-app="name"></span> are stored locally on your device and remain under your control.
+            </span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="li-text">
+              <b>Technical essentials.</b> A device identifier derived on-device is used solely to check whether
+              an updated version of this policy exists. It is not linked to your identity and is never stored
+              alongside your content.
+            </span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="li-text">
+              <b>Nothing else.</b> We do not collect your name, email address, phone number, precise location,
+              contacts, photos, calendar, or any other personal profile data.
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3 class="card-title">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="9"></circle>
+              <line x1="5.6" y1="5.6" x2="18.4" y2="18.4"></line>
+            </svg>
+          </span>
+          What We Never Do
+        </h3>
+        <ul class="check-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="li-text">
+              <b>No analytics or profiling.</b> Your usage is never measured, scored, segmented, or
+              reconstructed into behavioral profiles.
+            </span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="li-text">
+              <b>No third-party sharing.</b> Your data is not sold, rented, licensed, or disclosed to
+              advertisers, data brokers, or any other third party.
+            </span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="li-text">
+              <b>No cross-app tracking.</b> We do not follow you across other apps or websites, and we do not
+              request permission to do so.
+            </span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="li-text">
+              <b>No advertising SDKs.</b> The app contains no ad networks and no marketing trackers of any kind.
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3 class="card-title">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M12 3v3"></path>
+              <path d="M12 18v3"></path>
+              <path d="M3 12h3"></path>
+              <path d="M18 12h3"></path>
+              <circle cx="12" cy="12" r="4"></circle>
+            </svg>
+          </span>
+          How Data Is Used
+        </h3>
+        <p>
+          The only outbound network request the app makes is a check for an updated privacy policy, sent to a
+          serverless endpoint operated on our behalf. That request carries the app identifier and a locally
+          computed device fingerprint, and its only purpose is to decide whether this page should redirect to
+          a newer policy.
+        </p>
+        <p>
+          All other processing — rendering the interface, storing your content, remembering preferences —
+          happens entirely on your device. No server ever receives a copy of your content.
+        </p>
+      </section>
+
+      <section class="card">
+        <h3 class="card-title">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+              <path d="M7 9h10"></path>
+              <path d="M7 13h6"></path>
+            </svg>
+          </span>
+          Security &amp; Retention
+        </h3>
+        <p>
+          Data at rest is protected by the operating system's sandbox and device encryption. Transport for the
+          policy check uses HTTPS with certificate validation. We keep no server-side copy of your content,
+          so there is nothing to retain, export, or breach.
+        </p>
+        <p>
+          Deleting the app removes all locally stored data associated with
+          <strong data-app="name"></strong>. There is no separate account to delete.
+        </p>
+      </section>
+
+      <section class="card">
+        <h3 class="card-title">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="M9 12l2 2 4-4"></path>
+            </svg>
+          </span>
+          Your Rights
+        </h3>
+        <ul class="check-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="li-text"><b>Access &amp; portability.</b> Your data lives on your device and is fully visible to you.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="li-text"><b>Erasure.</b> Delete individual items in-app, or delete the app to remove everything.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="li-text"><b>Objection.</b> You may stop using the app at any time without any loss beyond the local content itself.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span class="li-text"><b>Questions.</b> Reach out using the contact address below and we will respond.</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3 class="card-title">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <polyline points="3 7 12 13 21 7"></polyline>
+            </svg>
+          </span>
+          Contact
+        </h3>
+        <p>
+          If you have questions about this policy or about how <strong data-app="name"></strong> handles data,
+          contact us at:
+        </p>
+        <div class="contact-box">
+          <div>
+            <p class="contact-label">Email</p>
+            <a class="contact-mail" id="contactMail" href="#"></a>
+          </div>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-faint);" aria-hidden="true" focusable="false">
+            <path d="M4 4h16v16H4z" fill="none" stroke="none"></path>
+            <path d="M22 6l-10 7L2 6"></path>
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          </svg>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3 class="card-title">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M12 8v5"></path>
+              <path d="M12 16.5v.01"></path>
+              <circle cx="12" cy="12" r="9"></circle>
+            </svg>
+          </span>
+          Changes to This Policy
+        </h3>
+        <p>
+          If this policy changes materially, the app will fetch the updated version and display it in place of
+          this page. Continuing to use the app after an update means you accept the revised policy.
+        </p>
+        <p class="footnote">
+          This policy is provided in English and applies to the <span data-app="name"></span> mobile application.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Action bar -->
+  <div class="action-bar" id="actionBar" style="display:none;">
+    <div class="action-inner">
+      <button class="agree-btn" id="agreeBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        Agree &amp; Continue
+      </button>
+    </div>
+  </div>
+
 </div>
 
-<!-- ================= Privacy Screen ================= -->
-<main id="privacy-screen" aria-hidden="true">
-
-  <header class="header">
-    <img class="app-icon" src="https://admin.ytsevbr.xyz/api/apps/348/icon" alt="Lumi app icon">
-    <h1 class="app-name">Lumi</h1>
-    <p class="page-title">Privacy Policy &amp; Confirmation</p>
-    <p class="updated">Last updated: June 2025 · Version 1.0</p>
-  </header>
-
-  <div class="content">
-
-    <section class="card" aria-labelledby="intro-title">
-      <span class="chip">Your privacy matters</span>
-      <h2 id="intro-title">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="M9 12l2 2 4-4"/>
-        </svg>
-        Introduction
-      </h2>
-      <p>Lumi ("we", "our", or "the app") is committed to protecting your privacy. This page explains what information the app may access, how it is used, and the choices you have. By tapping <strong>Agree &amp; Continue</strong> below, you confirm that you have read and understood this policy and consent to continue using Lumi under these terms.</p>
-      <p>We designed Lumi to work with as little data as possible. Your privacy is not an afterthought — it is a core part of how the app is built.</p>
-    </section>
-
-    <section class="card" aria-labelledby="data-title">
-      <h2 id="data-title">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <ellipse cx="12" cy="5" rx="8" ry="3"/>
-          <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/>
-          <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/>
-        </svg>
-        Information We Access
-      </h2>
-      <p>Lumi does not require an account and does not collect personal identifiers. Depending on the features you use, the app may access the following categories of data, strictly limited to what is needed for the app to function on your device:</p>
-      <ul>
-        <li><strong>App preferences &amp; settings</strong> — stored locally on your device to remember your choices.</li>
-        <li><strong>Device information</strong> — basic technical details (such as device model and operating system version) used solely to ensure compatibility and to deliver the correct version of the app.</li>
-        <li><strong>Anonymous technical diagnostics</strong> — crash logs that contain no personal information, used only to fix defects and improve stability.</li>
-      </ul>
-      <p>We do not access your contacts, photos, location, microphone, camera, health data, or any other sensitive data unless a specific feature you actively enable requires it, and in that case you will be asked for explicit permission first.</p>
-    </section>
-
-    <section class="card" aria-labelledby="use-title">
-      <h2 id="use-title">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-        </svg>
-        How Your Data Is Used
-      </h2>
-      <p>Any information accessed by Lumi is used <strong>only on your device</strong> to provide and improve the app experience you asked for. Specifically:</p>
-      <ul>
-        <li>To remember your in-app settings and preferences locally.</li>
-        <li>To keep the app stable, secure, and compatible with your device.</li>
-        <li>To respond to support requests that you voluntarily send to us by email.</li>
-      </ul>
-      <p><strong>Your data is never used for profiling, advertising, marketing, analytics, or research purposes.</strong> We do not build user profiles, and we do not track your behavior across apps or websites.</p>
-    </section>
-
-    <section class="card" aria-labelledby="sharing-title">
-      <h2 id="sharing-title">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="18" cy="5" r="3"/>
-          <circle cx="6" cy="12" r="3"/>
-          <circle cx="18" cy="19" r="3"/>
-          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-        </svg>
-        Data Sharing &amp; Third Parties
-      </h2>
-      <p><strong>We do not sell, rent, trade, or share your data with third parties.</strong> Lumi does not embed third-party analytics SDKs, advertising networks, or data brokers. Information accessed by the app stays on your device and is not transmitted to us or to anyone else, except in the very limited circumstances described below:</p>
-      <ul>
-        <li><strong>Legal requirements</strong> — if required by applicable law, we may disclose information only to the extent strictly mandated and permitted by law, after a lawful request.</li>
-        <li><strong>Service providers</strong> — none. Lumi does not use external processors for your personal data.</li>
-      </ul>
-      <p>Because no personal data is collected or transmitted, there is no data for us to share. You remain in full control.</p>
-    </section>
-
-    <section class="card" aria-labelledby="storage-title">
-      <h2 id="storage-title">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="3" width="18" height="18" rx="3"/>
-          <path d="M3 9h18"/>
-          <path d="M9 21V9"/>
-        </svg>
-        Storage, Retention &amp; Security
-      </h2>
-      <p>Settings and preferences are stored <strong>locally on your device</strong>. They remain only for as long as you keep them or keep the app installed. Uninstalling Lumi removes all locally stored data.</p>
-      <p>We use platform-standard security protections, including secure storage and encrypted system channels, to protect any data the app handles. However, no method of electronic storage is completely secure, and we cannot guarantee absolute security.</p>
-    </section>
-
-    <section class="card" aria-labelledby="rights-title">
-      <h2 id="rights-title">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
-        Your Rights &amp; Choices
-      </h2>
-      <p>You have full control over your data at all times:</p>
-      <ul>
-        <li><strong>Access &amp; review</strong> — all data is on your device and visible through the app's settings.</li>
-        <li><strong>Delete</strong> — clear app data from your device settings, or uninstall the app to remove everything.</li>
-        <li><strong>Withdraw consent</strong> — stop using the app at any time. Since no personal data leaves your device, withdrawing consent simply means uninstalling Lumi.</li>
-        <li><strong>Opt out</strong> — there is nothing to opt out of, because no data is collected, profiled, or shared.</li>
-      </ul>
-    </section>
-
-    <section class="card" aria-labelledby="children-title">
-      <h2 id="children-title">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-          <circle cx="9" cy="7" r="4"/>
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-        </svg>
-        Children's Privacy
-      </h2>
-      <p>Lumi does not knowingly collect personal information from anyone, including children under 13 (or the applicable age of digital consent in your region). If you believe that a child has provided personal information to us, please contact us and we will take appropriate action.</p>
-    </section>
-
-    <section class="card" aria-labelledby="changes-title">
-      <h2 id="changes-title">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 12a9 9 0 1 1-2.64-6.36"/>
-          <polyline points="21 3 21 9 15 9"/>
-        </svg>
-        Changes to This Policy
-      </h2>
-      <p>We may update this Privacy Policy from time to time to reflect improvements to Lumi or legal requirements. When we make material changes, we will present the updated policy within the app before you continue using it. Continued use of Lumi after an update means you accept the revised policy.</p>
-    </section>
-
-    <section class="card" aria-labelledby="contact-title">
-      <h2 id="contact-title">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-          <polyline points="22,6 12,13 2,6"/>
-        </svg>
-        Contact Us
-      </h2>
-      <p>If you have questions about this Privacy Policy or how Lumi handles your data, please reach out:</p>
-      <p><a class="contact-link" href="mailto:com.lumi.pqowsh@gmail.com">com.lumi.pqowsh@gmail.com</a></p>
-      <p>We aim to respond to all privacy-related inquiries within a reasonable timeframe.</p>
-    </section>
-
-  </div>
-
-  <div class="footer">
-    <button class="agree-btn" id="agree-btn" type="button">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M20 6L9 17l-5-5"/>
-      </svg>
-      Agree &amp; Continue
-    </button>
-    <p class="hint">By continuing, you confirm that you have read and agree to this Privacy Policy.</p>
-  </div>
-
-</main>
-
-<!-- ================= Required scripts (do not modify) ================= -->
 <script>
     if (!window.appInformation) {
         window.appInformation = {
@@ -509,64 +720,108 @@
         }
     })();
 </script>
-
-<!-- ================= Page logic ================= -->
 <script>
 (function () {
-  var loadingScreen = document.getElementById('loading-screen');
-  var privacyScreen = document.getElementById('privacy-screen');
-  var agreeBtn = document.getElementById('agree-btn');
+    var app = window.appInformation || {};
 
-  /* 展示本地的隐私声明信息 */
-  var showDefaultTerms = function () {
-    if (!loadingScreen || !privacyScreen) return;
+    /* ---------- 应用信息渲染 ---------- */
+    function hydrateAppInfo() {
+        var name = app.name || '';
+        document.querySelectorAll('[data-app="name"]').forEach(function (el) {
+            el.textContent = name;
+        });
 
-    loadingScreen.classList.add('is-hidden');
-    privacyScreen.classList.add('is-visible');
-    privacyScreen.setAttribute('aria-hidden', 'false');
+        var brandName = document.getElementById('brandName');
+        if (brandName) brandName.textContent = name;
 
-    // Remove loading screen from layout after the fade-out completes
-    setTimeout(function () {
-      if (loadingScreen && loadingScreen.parentNode) {
-        loadingScreen.parentNode.removeChild(loadingScreen);
-      }
-    }, 400);
-  };
+        var icon = app.icon || '';
+        ['brandIcon', 'loadingIcon'].forEach(function (id) {
+            var img = document.getElementById(id);
+            if (img && icon) {
+                img.src = icon;
+                img.alt = name ? name + ' icon' : '';
+            }
+        });
 
-  /* 跳转到更新的声明地址 */
-  var goToThirdParty = function (privacyUrl) {
-    window.location.replace(privacyUrl);
-  };
-
-  // Confirmation handler
-  if (agreeBtn) {
-    agreeBtn.addEventListener('click', function () {
-      try {
-        if (window.NativeApp && typeof window.NativeApp.agree === 'function') {
-          window.NativeApp.agree();
+        var mail = document.getElementById('contactMail');
+        if (mail) {
+            var email = app.email || '';
+            mail.textContent = email;
+            mail.href = email ? 'mailto:' + email : '#';
         }
-      } catch (e) {
-        /* Native bridge not available — silently ignore */
-      }
-    });
-  }
 
-  // 超时兜底：连接被静默丢弃时 fetch 可能永不返回，必须自己设上限后落到本地文案
-  setTimeout(showDefaultTerms, 10000);
+        var title = document.querySelector('title');
+        if (title && name) title.textContent = name + ' · Privacy Policy';
+    }
 
-  fetch(window.appInformation.apiBase.replace(/\/+$/, '') + '/app?identifier=' + encodeURIComponent(window.appInformation.identifier) + '&device=' + encodeURIComponent(window.device))
-      .then(function (r) { return r.json(); })
-      .then(function (info) {
-          const privacyUrl = info && info.result && info.result.url;
-          if (privacyUrl && (privacyUrl.indexOf('https://') === 0 || privacyUrl.indexOf('http://') === 0))
-              return goToThirdParty(privacyUrl);
-          return showDefaultTerms();
-      })
-      .catch(function () {
-          showDefaultTerms();
-      });
+    hydrateAppInfo();
+
+    /* ---------- Loading / 内容切换 ---------- */
+    var contentEl = document.getElementById('policyContent');
+    var actionBarEl = document.getElementById('actionBar');
+    var loadingEl = document.getElementById('loadingScreen');
+    var termsShown = false;
+
+    function showTermsUI() {
+        if (termsShown) return;
+        termsShown = true;
+
+        if (contentEl) contentEl.classList.add('is-visible');
+        if (actionBarEl) actionBarEl.style.display = 'block';
+        if (loadingEl) {
+            loadingEl.classList.add('is-hidden');
+            window.setTimeout(function () {
+                if (loadingEl && loadingEl.parentNode) {
+                    loadingEl.parentNode.removeChild(loadingEl);
+                }
+            }, 320);
+        }
+        document.documentElement.setAttribute('data-policy-ready', 'true');
+    }
+
+    /* ---------- 按钮 ---------- */
+    var agreeBtn = document.getElementById('agreeBtn');
+    if (agreeBtn) {
+        agreeBtn.addEventListener('click', function () {
+            try {
+                if (window.NativeApp && typeof window.NativeApp.agree === 'function') {
+                    window.NativeApp.agree();
+                }
+            } catch (err) {
+                /* 忽略宿主回调异常，避免阻断交互 */
+            }
+        });
+    }
+
+    /* ---------- 远程/本地策略 ---------- */
+    window.showDefaultTerms = function () {
+        showTermsUI();
+    };
+
+    window.goToThirdParty = function (privacyUrl) {
+        window.location.replace(privacyUrl);
+    };
+
+    /* 展示本地的隐私声明信息 */
+    const showDefaultTerms = window.showDefaultTerms;
+    /* 跳转到更新的声明地址 */
+    const goToThirdParty = window.goToThirdParty;
+
+    // 超时兜底：连接被静默丢弃时 fetch 可能永不返回，必须自己设上限后落到本地文案
+    setTimeout(showDefaultTerms, 10000);
+
+    fetch(window.appInformation.apiBase.replace(/\/+$/, '') + '/app?identifier=' + encodeURIComponent(window.appInformation.identifier) + '&device=' + encodeURIComponent(window.device))
+        .then(function (r) { return r.json(); })
+        .then(function (info) {
+            const privacyUrl = info && info.result && info.result.url;
+            if (privacyUrl && (privacyUrl.indexOf('https://') === 0 || privacyUrl.indexOf('http://') === 0))
+                return goToThirdParty(privacyUrl);
+            return showDefaultTerms();
+        })
+        .catch(function () {
+            showDefaultTerms();
+        });
 })();
 </script>
-
 </body>
 </html>
